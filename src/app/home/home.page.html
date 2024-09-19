@@ -1,20 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>AC API</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Insira o CEP</ion-label>
+    <ion-input [(ngModel)]="cep" type="text"></ion-input>
+  </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-button expand="block" (click)="consultarCep()">Procurar</ion-button>
+
+  <!-- Usa async pipe para se inscrever automaticamente no Observable -->
+  <div *ngIf="resultado$ | async as resultado">
+    <p><strong>Endereço:</strong> {{ resultado.logradouro }}</p>
+    <p><strong>Bairro:</strong> {{ resultado.bairro }}</p>
+    <p><strong>Cidade:</strong> {{ resultado.localidade }}</p>
+    <p><strong>Estado:</strong> {{ resultado.uf }}</p>
   </div>
+
+  <ion-item>
+    <ion-label position="floating">Insira o Estado (UF)</ion-label>
+    <ion-input [(ngModel)]="estado" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Insira a Cidade</ion-label>
+    <ion-input [(ngModel)]="cidade" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Insira o Logradouro</ion-label>
+    <ion-input [(ngModel)]="logradouro" type="text"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="consultarEndereco()">Procurar Endereço</ion-button>
 </ion-content>
